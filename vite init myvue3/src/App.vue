@@ -5,7 +5,10 @@
     <h2>年龄:{{ age }}</h2>
     <h2>工作种类:{{ job.type }}</h2>
     <h2>工作薪水:{{ job.salary }}</h2>
+    <h2>爱好:{{ hobby }}</h2>
     <button @click="changeInfo">修改个人信息</button>
+    <button @click="add">添加一个属性</button>
+    <button @click="del">删除一个属性</button>
   </div>
 </template>
 <script>
@@ -25,6 +28,7 @@ export default {
         }
       }
     })
+    let hobby = reactive(['抽烟','喝酒','烫头'] )
     // 不支持基本数据类型   只能响应对象形式（或复杂数据类型）
     // let number = reactive(666)  //报错
     let number = reactive({
@@ -39,6 +43,7 @@ export default {
       job.type = 'UI设计师'
       job.salary = '50k'
       job.a.b.C = 999
+      hobby[0] = '学习'
       // console.log(name,age);
     // console.log(job.value);
 
@@ -48,6 +53,7 @@ export default {
       name,
       age,
       job,
+      hobby,
       changeInfo
     }
 
