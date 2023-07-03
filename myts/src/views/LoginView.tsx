@@ -21,6 +21,10 @@ function LoginView() {
                 // 获取路由成功,存储路由列表
                 sessionStorage.setItem('route',JSON.stringify(res.route))
                 sessionStorage.setItem('menu',JSON.stringify(res.list))
+                // 清空tabs
+                sessionStorage.removeItem('tabs')
+                // 清空激活的key
+                sessionStorage.removeItem('activeKey')
                 // 跳转到admin页面
                 navigate('/admin')
             })
