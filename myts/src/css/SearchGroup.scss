@@ -1,0 +1,22 @@
+.ant-col{
+    display: flex;
+    align-items: center;
+    flex: 0 0 33.166666666666668%;
+    .ant-input{
+        width: 55%;
+        margin: 10px 10px;
+    }
+    .ant-picker {
+        width: 55%;
+        margin: 10px 10px;
+    }
+}
+.state{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+   .right{
+    // width: 100%;
+    margin-left: 10px;
+   }
+}

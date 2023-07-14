@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Error from "../views/Error";
 import React, { lazy, Suspense } from "react";
 import { Spin } from "antd";
+import Private from "../views/Private";
 function RouterView() {
   // 获取路由
   const route = JSON.parse(sessionStorage.getItem("route") || "[]");
@@ -19,7 +20,7 @@ function RouterView() {
         { path: "login", element: <LoginView /> },
         {
           path: "/admin",
-          element: <AdminView />,
+          element: <Private><AdminView /></Private>,
           children:route.map((item:any)=>{
             return {
                path:item.path,

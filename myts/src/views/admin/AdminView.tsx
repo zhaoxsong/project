@@ -7,12 +7,14 @@ import {
   MenuUnfoldOutlined,
   UploadOutlined,
   UserOutlined,
+  DownOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
 
 // 导入所有,名称Icon
 import * as Icon from "@ant-design/icons";
-import { Layout, Menu, Button, theme, Tabs } from "antd";
+import { Layout, Menu, Button, theme, Tabs, Dropdown } from "antd";
+import Avatar from "antd/es/avatar/avatar";
 // import { act } from "react-dom/test-utils";
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 
@@ -39,6 +41,8 @@ function mapMenu(list: any) {
 }
 
 const AdminView: React.FC = () => {
+  // 用户信息
+  const userInfo = JSON.parse(sessionStorage.getItem("user") || "{}");
   const menu = JSON.parse(sessionStorage.getItem("menu") || "[]");
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -67,7 +71,9 @@ const AdminView: React.FC = () => {
       location.reload();
     }
     // 如果没有菜单，就跳转到登录页面
-    navigate(activeKey);
+    if(location.pathname == '/admin'){
+      navigate(activeKey);
+    }
   }, []);
 
   const defaultPanes = JSON.parse(sessionStorage.getItem("tabs") || `[{"key":"dash","title":"首页","label":"概况","closable":false}]`);
@@ -106,10 +112,14 @@ const AdminView: React.FC = () => {
     }
   };
 
-
+// 标签处理
+const logout = () =>{
+  sessionStorage.clear();
+  navigate('/');
+}
 
   return (
-    <Layout className="AdminView">
+    <Layout className={collapsed?'adminView collapsed':'adminView'}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <Menu
@@ -118,27 +128,11 @@ const AdminView: React.FC = () => {
           defaultSelectedKeys={["1"]}
           onClick={menuClick}
           items={mapMenu(menu)}
-          // items={[
-          //   {
-          //     key: '1',
-          //     icon: <UserOutlined />,
-          //     label: 'nav 1',
-          //   },
-          //   {
-          //     key: '2',
-          //     icon: <VideoCameraOutlined />,
-          //     label: 'nav 2',
-          //   },
-          //   {
-          //     key: '3',
-          //     icon: <UploadOutlined />,
-          //     label: 'nav 3',
-          //   },
-          // ]}
+   
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
+        <Header style={{ padding: 0, background: colorBgContainer }} className="header">
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -149,6 +143,15 @@ const AdminView: React.FC = () => {
               height: 64,
             }}
           />
+           <div className="right">
+          <Avatar src={userInfo.avatar}  icon={<UserOutlined />}/>
+          <Dropdown menu={{ items:[
+            {key:"1",label:<p>积分:{userInfo.score}</p>},
+            {key:"2",label:<p onClick={logout}>退出</p>},
+          ] }}>
+            <a  style={{color:"#000",position:"relative"}}> {userInfo.name} <DownOutlined /> </a>           
+          </Dropdown>
+          </div>
         </Header>
         <Content
           style={{

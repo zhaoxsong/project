@@ -1,0 +1,32 @@
+.name{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    .ant-input{
+        width: 20%;
+    }
+    .ant-picker{
+        width: 20%;
+    }
+    .lable{
+        display: inline-block;
+        width: 16%;
+        text-align: right;
+    }
+    .tu{
+        width: 19%;
+        text-align: right;
+    }
+}
+
+.center{
+    margin: 40px 0;
+    text-align: center;
+}
+.shop{
+    text-align: center;
+    margin: 40px 0;
+   Button{
+    // width: 20%;
+   }
+}

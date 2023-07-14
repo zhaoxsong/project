@@ -44,3 +44,9 @@ html{
   background: rgba(255, 255, 255, 0.05);
   border-radius: 4px;
 }
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 24px !important;
+}
